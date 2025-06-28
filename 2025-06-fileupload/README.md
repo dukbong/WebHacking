@@ -44,7 +44,7 @@
 
     * * * * * root /tmp/fileupload
     ```
-    3. 권한 성정
+    3. 권한 설설정
     ```bash
     chmode 744 /etc/cron.d/fileupload
     ```
@@ -53,20 +53,20 @@
     service cron restart
     ```
     
-3. 웹 애플리케이션 접속
+4. 웹 애플리케이션 접속
     
     ```bash
     http://localhost:8080
     ```
     
-4. 주요 엔드포인트
+5. 주요 엔드포인트
     
     | 경로 | 설명 | 메소드 | 비고 |
     | --- | --- | --- | --- |
     | / | 파일 업로드 페이지 | GET, POST | 취약점 시연 대상 |
     | /uploads/{file_name} | 파일 경로 | GET | 취약점 시연 대상 |
 
-5. 악성 코드
+6. 악성 코드
     
     ```php
     <?php
