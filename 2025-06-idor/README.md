@@ -1,9 +1,14 @@
-# 0. 개요
+# 1. IDOR 취약점 개요
+
+IDOR (Insecure Direct Object Reference)는 인증이나 권한 검증 없이 직접적으로 시스템 자원에 접근할 수 있도록 허용하는 취약점으로 보안 검증이 미흡한 경우 공격자가 URL 파라미터나 요청 데이터를 조작해 다른 사용자의 민감한 정보를 열람하거나 조작할 수 있습니다.
+
+# 2. PoC 개요
+
 본 PoC는 IDOR(Insecure Direct Object Reference) 취약점 중 주문 결제 권한 검증 누락 사례를 재현합니다.
 
 인증된 사용자가 다른 사용자의 주문 UUID를 조작해 결제 처리를 진행할 수 있는 문제를 실습용 환경에서 확인할 수 있습니다.
 
-# 1. PoC 환경 구성
+# 3. PoC 환경 구성
 
 - 언어 및 프레임워크 : Python 3.11, Flask
 - 데이터베이스: SQLite3 (내장형, 경량 DB)
@@ -16,7 +21,7 @@
     - Docker 이미지 빌드 후 컨테이너 실행 시 `db.py`를 통해 DB 자동 생성 및 초기화
     - `flask run` 명령으로 0.0.0.0 주소에서 5000 포트로 실행
 
-# 2. PoC 실행 방법
+# 4. PoC 실행 방법
 
 1. Docker 이미지 가져오기
     
@@ -44,7 +49,7 @@
     | /login | 로그인 페이지 | GET, POST |  |
     | /logout | 로그아웃 | GET |  |
     | /dashboard | 로그인 후 메인 대시보드 | GET |  |
-    | /order/<uuid> | 주문 상세 및 결 | GET, POST | IDOR 취약점 대상 |
+    | /order/<uuid> | 주문 상세 및 결 | GET, POST | IDOR 취약점 시연 대상 |
     
     공격자의 주문 UUID는 `c42ba5b5-c572-42fa-a9c6-ed8dc2ae842e` 입니다.
     
