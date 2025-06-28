@@ -44,15 +44,23 @@ IDOR (Insecure Direct Object Reference)는 인증이나 권한 검증 없이 직
 4. 경로 및 설명
     
     
-    | 경로 | 설명 | 메소드 | 비 |
+    | 경로 | 설명 | 메소드 | 비고 |
     | --- | --- | --- | --- |
     | /login | 로그인 페이지 | GET, POST |  |
     | /logout | 로그아웃 | GET |  |
     | /dashboard | 로그인 후 메인 대시보드 | GET |  |
-    | /order/<uuid> | 주문 상세 및 결 | GET, POST | IDOR 취약점 시연 대상 |
+    | /order/<uuid> | 주문 상세 및 결제 | GET, POST | IDOR 취약점 시연 대상 |
     
     공격자의 주문 UUID는 `c42ba5b5-c572-42fa-a9c6-ed8dc2ae842e` 입니다.
     
 5. 기본 사용자 계정
     - attacker / 1234
     - victim / 1234
+
+# 5. PoC 재현 방법
+
+1. 피해자(victim) 계정으로 로그인을 합니다.
+2. (가정) 외부에서 공격자(attacker)가 공유한 링크를 클릭 합니다.
+3. 현재 로그인(인증)된 사용자는 피해자(victim)으로 나와있는 것을 확인합니다.
+4. 결제하기 버튼을 클릭합니다.
+5. 결제 시 권한 검증이 미비하여 피해자(victim)은 공격자(attacker)의 주문을 결제하게 됩니다.
