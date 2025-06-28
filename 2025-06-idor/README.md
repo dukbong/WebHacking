@@ -1,3 +1,8 @@
+# 0. 개요
+본 PoC는 IDOR(Insecure Direct Object Reference) 취약점 중 주문 결제 권한 검증 누락 사례를 재현합니다.
+
+인증된 사용자가 다른 사용자의 주문 UUID를 조작해 결제 처리를 진행할 수 있는 문제를 실습용 환경에서 확인할 수 있습니다.
+
 # 1. PoC 환경 구성
 
 - 언어 및 프레임워크 : Python 3.11, Flask
