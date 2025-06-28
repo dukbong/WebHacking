@@ -1,0 +1,8 @@
+<div style="text-align:right;">현재 로그인: {{ username }}</div>
+<h2>주문 확인</h2>
+<p>상품명: {{ order["item"] }}</p>
+<p>가격: {{ order["price"] }}원</p>
+
+<form method="POST">
+    <button type="submit">결제하기</button>
+</form>
