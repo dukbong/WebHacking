@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <!-- 👇 XSS 실습을 위한 설정 -->
+    <p>{{ post.content | safe }}</p>
+    <a href="/dashboard">대시보드로 돌아가기</a>
+</body>
+</html>

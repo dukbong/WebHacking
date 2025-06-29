@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>대시보드</title>
+</head>
+<body>
+    <h1>환영합니다, {{ username }}님!</h1>
+    <a href="/logout">로그아웃</a>
+
+    <h2>게시물 목록</h2>
+    {% if posts %}
+        <ul>
+        {% for post in posts %}
+            <li>
+                <a href="/post/{{ post.id }}">
+                    {{ post.title }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>등록된 게시물이 없습니다.</p>
+    {% endif %}
+
+    <a href="/post/new">새 글 작성</a>
+</body>
+</html>
