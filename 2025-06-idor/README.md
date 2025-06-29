@@ -8,7 +8,7 @@ IDOR (Insecure Direct Object Reference)는 인증이나 권한 검증 없이 직
 
 인증된 사용자가 다른 사용자의 주문 UUID를 조작해 결제 처리를 진행할 수 있는 문제를 실습용 환경에서 확인할 수 있습니다.
 
-# 3. PoC 환경 구성
+# 3. 환경 구성
 
 - 언어 및 프레임워크 : Python 3.11, Flask
 - 데이터베이스: SQLite3 (내장형, 경량 DB)
@@ -21,7 +21,7 @@ IDOR (Insecure Direct Object Reference)는 인증이나 권한 검증 없이 직
     - Docker 이미지 빌드 후 컨테이너 실행 시 `db.py`를 통해 DB 자동 생성 및 초기화
     - `flask run` 명령으로 0.0.0.0 주소에서 5000 포트로 실행
 
-# 4. PoC 실행 방법
+# 4. 실행 방법
 
 1. Docker 이미지 가져오기
     
