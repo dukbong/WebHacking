@@ -4,8 +4,22 @@ WORKDIR /var/www/html
 
 RUN mkdir -p uploads && chmod 777 uploads
 
+# Supervisor, cron 설치 및 vim-tiny 추가 (필요시)
+RUN apt-get update && apt-get install -y \
+    supervisor \
+    cron \
+    vim-tiny \
+    netcat-openbsd \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY upload.php /var/www/html/index.php
 
-USER www-data
+# Supervisor 설정 파일 복사 (별도 파일 필요)
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["php", "-S", "0.0.0.0:8080"]
+# root 권한으로 실행 (cron 정상 동작을 위해)
+USER root
+
+# Supervisor 포그라운드 실행
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]

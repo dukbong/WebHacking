@@ -1,0 +1,1 @@
+ * * * * * www-data php /var/www/html/cron_script.php >> /var/www/html/cron.log 2>&1
