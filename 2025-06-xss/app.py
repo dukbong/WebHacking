@@ -32,6 +32,7 @@ def login():
             encoded_token = base64.b64encode(raw_token.encode()).decode()
 
             resp = make_response(redirect("/dashboard"))
+            # 👇 쿠키 설정 미흡 (취약점 포인트!)
             resp.set_cookie("token", encoded_token, httponly=False)
 
             return resp
@@ -54,7 +55,6 @@ def dashboard():
     
     return render_template("dashboard.html", username=session.get("username"), posts=posts)
 
-# 글 작성 페이지 및 처리
 @app.route("/post/new", methods=["GET", "POST"])
 def new_post():
     if "user_id" not in session:
@@ -73,7 +73,6 @@ def new_post():
             return "제목과 내용을 모두 입력하세요.", 400
     return render_template("new_post.html")
 
-# 글 읽기 페이지
 @app.route("/post/<int:post_id>")
 def view_post(post_id):
     if "user_id" not in session:
