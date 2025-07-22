@@ -7,6 +7,3 @@ It has an account with a predictable username and password, which can be found i
 - Candidate passwords (./list/password.txt)
 
 To solve the lab, enumerate a valid username, brute-force this user's password, then access their account page.
-
----
-Answer: username=appserver&password=zxcvbn
